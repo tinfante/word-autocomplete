@@ -1,6 +1,5 @@
 (ns word-autocomplete.core
   (:gen-class)
-  (:require [clojure.string :as s])
   )
 
 
@@ -74,8 +73,7 @@
   (let
     [accum (atom [])]
     (do (-descend-tree prefix-node "" accum) (reverse (sort @accum)))
-    )
-  )
+    ))
 
 
 (defn insert-word-freq
@@ -111,18 +109,21 @@
 
 
 (defn read-tsv
-  [filename]
-  (map (fn [line] (let [[word freq] (s/split line #"\t")]
-                    [word (bigint freq)]))
-       (s/split (slurp filename) #"\n")))
+  [filename num-lines]
+  (map #(let [[word freq] (clojure.string/split % #"\t")]
+  ; try pmap in a computer with more cores.
+          [word (bigint freq)]
+          )
+       (with-open [rdr (clojure.java.io/reader filename)]
+         (doall (take num-lines (line-seq rdr)))
+         )))
 
 
 (defn suggest
   [trie prefix]
   (let [suff-freqs (suffix-suggestions (has-prefix trie prefix))]
     (map (fn [x] [(first x) (str prefix (second x))]) suff-freqs)
-    )
-  )
+    ))
 
 
 (defn -main

@@ -38,7 +38,7 @@ word-autocomplete.core=> (suggest trie "o")
 Now lets try with the first 100,000 unigram types ordered by frequency from Google Ngrams for Spanish, which represent 68 billion tokens.
 
 ```clojure
-word-autocomplete.core=> (def trie (insert-many-word-freqs (take 100000 (read-tsv "resources/google-1gram-spanish-freq.tsv"))))
+word-autocomplete.core=> (def trie (insert-many-word-freqs (read-tsv "resources/google-1gram-spanish-freq.tsv" 100000)))
 #'word-autocomplete.core/trie
 
 word-autocomplete.core=> (time (take 10 (suggest trie "escor")))
@@ -56,7 +56,8 @@ Obviously, results would be better with lemmatization to consolidate inflectiona
 
 
 ## TODO
-* Don't read all the data .tsv, only the needed lines.
+* Have a function read one character at a time, and call suggest function.
+* Re-do README.md outputs using Ultra plugin for lein repl.
 * Improve memory use, `insert-many-word-freqs` fails when given the first 1,000,000 types (almost half the data). Bear in mind though, that at that point the data is rather noisy and has lots of spelling mistakes, includes words in other languages, etc, so this is strictly a programming challange.
 * Improve Trie creation times, probably by parallelizing the task.
 * Make the code fully functional if possible. Try using immutable data instead of an atom.
