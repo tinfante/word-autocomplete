@@ -1,5 +1,6 @@
 (ns word-autocomplete.core
   (:gen-class)
+  (:import [jline.console ConsoleReader])
   )
 
 
@@ -128,5 +129,8 @@
 
 (defn -main
   []
-  (println "Use with 'lein repl'.")
+  (let [cr (ConsoleReader.)
+        keyint (.readCharacter cr)]
+  (println (format "Got %d ('%c')!" keyint (char keyint))))
+  (-main)
   )
