@@ -58,7 +58,7 @@ Obviously, results would be better with lemmatization to consolidate inflectiona
 ## TODO
 * Have a function read one character at a time, and call suggest function.
 * Re-do README.md outputs using Ultra plugin for lein repl.
-* Improve `insert-many-word-freqs`, produces stack overflow when given the first 1,000,000 types (almost half the data). Bear in mind though, that at that point the data is rather noisy and has lots of spelling mistakes, includes words in other languages, etc, so this is strictly a programming challange. Shouldn't Clojure using loop/recur (tail optimization) not have stack issues? 
+* Improve `insert-many-word-freqs`, produces stack overflow when given the first 1,000,000 types (almost half the data). Bear in mind though, that at that point the data is rather noisy and has lots of spelling mistakes, includes words in other languages, etc, so this is strictly a programming challange. Shouldn't Clojure using loop/recur (tail optimization) not have stack issues? See [this](https://stuartsierra.com/2015/04/26/clojure-donts-concat) and [this](https://medium.com/@nikosfertakis/clojure-lazy-evaluation-and-stack-overflow-exceptions-1b8ee732ba0b).
 * Improve Trie creation times, probably by parallelizing the task.
 * Make the code fully functional if possible. Try using immutable data instead of an atom.
 * Remove code duplication.
