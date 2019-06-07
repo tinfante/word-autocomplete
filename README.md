@@ -1,6 +1,6 @@
 # Word Level Autocomplete with a Frequency Trie
 
-I learned about [Tries](https://github.com/tinfante/SimpleTrie) recently. Here is a small experiment that extends the idea to be sensitive to character frequencies, and applies it to real data. Specifically to Spanish Google Ngrams unigram frequencies (re-used from [frecuencia-palabras-letras](https://github.com/tinfante/frecuencias-palabras-letras)).
+I learned about [Tries](https://github.com/tinfante/algorithms-and-data-structures/tree/master/Data-Structures/Trie) recently. Here is a small experiment that extends the idea to be sensitive to character frequencies, and applies it to real data. Specifically to Spanish Google Ngrams unigram frequencies (re-used from [frecuencia-palabras-letras](https://github.com/tinfante/frecuencias-palabras-letras)).
 
 
 Start the repl,
