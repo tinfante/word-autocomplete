@@ -2,7 +2,6 @@
   (:gen-class)
   (:require [clojure.string :as s])
   (:require [clojure.java.io :as io])
-  (:import [jline.console ConsoleReader])
   )
 
 
@@ -127,30 +126,3 @@
   (let [suff-freqs (suffix-suggestions (has-prefix trie prefix))]
     (map (fn [x] [(first x) (str prefix (second x))]) suff-freqs)
     ))
-
-
-(def trie (insert-many-word-freqs (read-tsv "resources/google-1gram-spanish-freq.tsv" 10000)))
-
-(defn -main
-  ([]
-   (println " #")
-   (let [cr (ConsoleReader.)
-         keyint (.readCharacter cr)]
-     (cond
-       (<= 65 keyint 90) (-main (str (s/lower-case (char keyint))))
-       (<= 97 keyint 122) (-main (str (char keyint)))
-       :default (-main)
-       )))
-  ([prefix]
-   (println (str prefix " #"))
-   (let [cr (ConsoleReader.)
-         keyint (.readCharacter cr)]
-     (cond
-       (= keyint 13) (-main)  ; enter
-       (= keyint 127) (-main) ; backspace
-       (<= 65 keyint 90) (do (println (take 10 (suggest trie (str prefix (s/lower-case (char keyint))))))
-                             (-main (str prefix (s/lower-case (char keyint)))))
-       (<= 97 keyint 122) (do (println (take 10 (suggest trie (str prefix (char keyint)))))
-                              (-main (str prefix (char keyint))))
-       :default (println keyint)
-       ))))

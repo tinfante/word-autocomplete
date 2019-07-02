@@ -5,7 +5,7 @@ I learned about [Tries](https://github.com/tinfante/algorithms-and-data-structur
 
 Start the repl,
 ```bash
-$ lein trampoline repl
+$ lein repl
 ```
 A character is associated to a map that has a `:count` key (recording that character's frequency of appearance) and
 may have `:next` and `:end` keys. If the character is the last character in a word, it has `:end` `true`. If another
@@ -52,13 +52,9 @@ word-autocomplete.core=> (time (take 10 (suggest trie "escorp")))
 ```
 🦂🦂🦂
 
-Obviously, results would be better with lemmatization to consolidate inflectional variations.
-
 
 ## TODO
 * Have a function read one character at a time, and call suggest function.
-* Re-do README.md outputs using Ultra plugin for lein repl.
 * Improve `insert-many-word-freqs`, produces stack overflow when given the first 1,000,000 types (almost half the data). Bear in mind though, that at that point the data is rather noisy and has lots of spelling mistakes, includes words in other languages, etc, so this is strictly a programming challange. Shouldn't Clojure using loop/recur (tail optimization) not have stack issues? See [this](https://stuartsierra.com/2015/04/26/clojure-donts-concat) and [this](https://medium.com/@nikosfertakis/clojure-lazy-evaluation-and-stack-overflow-exceptions-1b8ee732ba0b).
-* Improve Trie creation times, probably by parallelizing the task.
 * Make the code fully functional if possible. Try using immutable data instead of an atom.
 * Remove code duplication.
